@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ExpireController.instance
-      .init(DateTime.now().subtract(const Duration(hours: 1)));
+  ExpireController.instance.init(DateTime.now().add(const Duration(hours: 1)));
   runApp(const MyApp());
 }
 
