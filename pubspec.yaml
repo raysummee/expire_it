@@ -1,0 +1,20 @@
+name: expire_it
+description: App will expire or the user will not able to user after expiry date finishes. Best for freelancing client trial builds.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=3.0.6 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ntp: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
