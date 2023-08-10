@@ -6,16 +6,15 @@ class ExpireController {
   ExpireController._();
 
   void init(DateTime expiryDate, {bool disable = false}) {
-    if (disable) {
-      return _setExpire(false);
-    }
-    return _runExpireLoop(expiryDate);
+    if (disable) return;
+    _expireState.value = ExpireState.unaware;
+    _runExpireLoop(expiryDate);
   }
 
   Timer? _timer;
 
   final ValueNotifier<ExpireState> _expireState =
-      ValueNotifier<ExpireState>(ExpireState.unaware);
+      ValueNotifier<ExpireState>(ExpireState.running);
 
   void _runExpireLoop(DateTime expiryDate) {
     _checkExpired(expiryDate);
