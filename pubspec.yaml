@@ -1,6 +1,6 @@
 name: expire_it
 description: App will expire or the user will not able to user after expiry date finishes. Best for freelancing client trial builds.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/raysummee/expire_it
 repository: https://github.com/raysummee/expire_it
 
