@@ -1,3 +1,8 @@
+
+## [0.1.0] - 2023-08-24
+### Added
+- Documented and structural changes
+
 ## [0.0.3] - 2023-08-21
 ### Added
 - Secure expiration mechanism to prevent unauthorized access after a specified date and time.
