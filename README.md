@@ -28,7 +28,7 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
 
    ```yaml
    dependencies:
-     expireit: ^1.0.0
+     expireit: ^0.1.0
    ```
 
 2. **Import the Package:** Import the ExpireIt package in your Dart file:
@@ -37,18 +37,13 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
     import 'package:expireit/expireit.dart';
     ```
 
-3. **Initialize ExpireIt:** Initialize the ExpireIt package in your main function with the necessary configuration, such as the expiration date:
-
-    ```dart
-    void main() {
-        ExpireController.instance.init(DateTime(2023, 12, 20));
-        runApp(MyApp());
-    }
-    ```
-4. **Build UI:** In your Flutter app's build method, utilize the ExpireBuilder widget to manage the UI based on expiration status:
+3. **Build UI:** In your Flutter app's build method, utilize the ExpireBuilder widget to manage the UI based on expiration status:
 
     ```dart
     ExpireBuilder(
+        controller: UserDefineExpireController(
+            expiryDate: DateTime(datetime),
+        ),
         expireBuilder: (context) {
             return const Center(
                 child: Text("Expired"),
