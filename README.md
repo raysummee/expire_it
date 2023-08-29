@@ -1,16 +1,16 @@
-# ExpireIt Flutter App
+# Expire It Flutter App
 
-ExpireIt is a unique Flutter app designed to provide an expiration mechanism for applications. This app ensures that the target app becomes inaccessible after a specified date and time, preventing unauthorized usage beyond the intended period. Unlike other methods that rely on local device time changes, ExpireIt sources its expiration information from an online server, making it highly secure and tamper-resistant.
+Expire It is a unique Flutter app designed to provide an expiration mechanism for applications. This app ensures that the target app becomes inaccessible after a specified date and time, preventing unauthorized usage beyond the intended period. Unlike other methods that rely on local device time changes, Expire It sources its expiration information from an online server, making it highly secure and tamper-resistant.
 
 ## Features
 
-- **Secure Expiration:** ExpireIt utilizes an online server to fetch expiration date and time, ensuring that unauthorized access attempts through local time changes are ineffective.
+- **Secure Expiration:** Expire It utilizes an online server to fetch expiration date and time, ensuring that unauthorized access attempts through local time changes are ineffective.
 
 - **Reliable Server:** The expiration information is stored on a reliable online server, making it virtually impossible to manipulate the expiration date and time locally.
 
-- **Easy Integration:** Integration of the ExpireIt feature into your Flutter app is straightforward and hassle-free.
+- **Easy Integration:** Integration of the Expire It feature into your Flutter app is straightforward and hassle-free.
 
-- **Customizable UI:** The UI of the ExpireIt dialog can be customized to seamlessly blend with the design of your app.
+- **Customizable UI:** The UI of the Expire It dialog can be customized to seamlessly blend with the design of your app.
 
 ## How It Works
 
@@ -28,7 +28,7 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
 
    ```yaml
    dependencies:
-     expireit: ^0.1.0
+     expireit: ^0.2.0
    ```
 
 2. **Import the Package:** Import the ExpireIt package in your Dart file:
@@ -37,13 +37,19 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
     import 'package:expireit/expireit.dart';
     ```
 
-3. **Build UI:** In your Flutter app's build method, utilize the ExpireBuilder widget to manage the UI based on expiration status:
+3. **Initialize:** Initialize the ExpireIt.controller with a specific expiration date. In this example, we use a UserDefineExpireController:
 
     ```dart
-    ExpireBuilder(
-        controller: UserDefineExpireController(
-            expiryDate: DateTime(datetime),
-        ),
+    void main() {
+        ExpireIt.controller = UserDefineExpireController(expiryDate: DateTime(2023));
+        runApp(const MyApp());
+    }
+    ```
+
+4. **Build UI:** In your Flutter app's build method, utilize the ExpireIt widget to manage the UI based on expiration status:
+
+    ```dart
+    ExpireIt(
         expireBuilder: (context) {
             return const Center(
                 child: Text("Expired"),
@@ -61,7 +67,7 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
         },
     ),
     ```
-6. **Customize UI**: Customize the appearance of the expiration dialog and loading indicator to match your app's design.
+5. **Customize UI**: Customize the appearance of the expiration dialog and loading indicator to match your app's design.
 
 For a more detailed guide and advanced configuration options, please refer to the ExpireIt documentation.
 

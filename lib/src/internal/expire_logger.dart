@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
 /// A utility class for logging information and errors related to the ExpireIt functionality.
 ///
@@ -11,22 +11,22 @@ class ExpireLogger {
   /// Logs an informational message.
   ///
   /// This method logs the provided [message] as an informational message, applying color codes for
-  /// improved visibility. The message is formatted as "[ExpireIt - INFO]: message".
+  /// improved visibility. The message is formatted as "[INFO]: message".
   ///
   /// Returns the original [message] for convenience.
   static String info(String message) {
-    debugPrint("\x1B[33m[ExpireIt - INFO]: $message\x1B[0m");
+    log("\x1B[33m[INFO]: $message\x1B[0m", name: "Expire It");
     return message;
   }
 
   /// Logs an error message.
   ///
   /// This method logs the provided [message] as an error message, applying color codes for
-  /// highlighting. The message is formatted as "[ExpireIt - Error]: message".
+  /// highlighting. The message is formatted as "[Error]: message".
   ///
   /// Returns the original [message] for convenience.
   static String error(String message) {
-    debugPrint("\x1B[31m[ExpireIt - Error]: $message\x1B[0m");
+    log("\x1B[31m[Error]: $message\x1B[0m", name: "Expire It", level: 2000);
     return message;
   }
 }

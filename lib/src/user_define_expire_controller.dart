@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ntp/ntp.dart';
-import 'package:expire_it/src/expire_state.dart';
+import 'package:expire_it/src/internal/expire_state.dart';
 import 'package:expire_it/src/internal/expire_logger.dart';
 import 'internal/expire_base_controller.dart';
 
