@@ -1,3 +1,7 @@
+## [0.1.2] - 2023-08-30
+### Added
+- Added localDateTimeFallback Parameter: Added a parameter localDateTimeFallback to the UserDefineExpireController constructor. When set to true, it allows the controller to fall back to using local device time when the server time is unavailable.
+
 ## [0.1.1] - 2023-08-24
 ### Added
 - Example folder rearranged
