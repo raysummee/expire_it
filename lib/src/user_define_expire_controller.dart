@@ -40,6 +40,7 @@ class UserDefineExpireController implements ExpireBaseController {
   /// Starts a periodic timer for checking the expiration state.
   void _runExpireLoop(DateTime expiryDate) {
     _checkExpired(expiryDate);
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(minutes: 10), (timer) {
       _checkExpired(expiryDate);
     });
