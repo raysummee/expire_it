@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ntp/ntp.dart';
-import 'package:expire_it/src/expire_state.dart';
+import 'package:expire_it/src/internal/expire_state.dart';
 import 'package:expire_it/src/internal/expire_logger.dart';
 import 'internal/expire_base_controller.dart';
 
@@ -15,10 +15,18 @@ class UserDefineExpireController implements ExpireBaseController {
   Timer? _timer;
 
   /// The expiry date to be checked against.
-  DateTime expiryDate;
+  final DateTime expiryDate;
 
   /// Creates a [UserDefineExpireController] with the given [expiryDate].
-  UserDefineExpireController({required this.expiryDate});
+  /// The [expiryDate] represents the date and time at which the entity being managed is set to expire.
+  /// The [localDateTimeFallback] indicates whether to fallback to local device time if server time is not available.
+  UserDefineExpireController({
+    required this.expiryDate,
+    this.localDateTimeFallback = true,
+  });
+
+  /// Indicates whether to use local date and time when the server time is unavailable.
+  final bool localDateTimeFallback;
 
   /// The [ValueNotifier] that holds the current expiration state.
   @override
@@ -32,12 +40,13 @@ class UserDefineExpireController implements ExpireBaseController {
   /// Starts a periodic timer for checking the expiration state.
   void _runExpireLoop(DateTime expiryDate) {
     _checkExpired(expiryDate);
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(minutes: 10), (timer) {
       _checkExpired(expiryDate);
     });
   }
 
-  /// Checks if the provided [expiryDate] has been reached or not.
+  /// Checks if the provided [expiryDate] has been reached or not using NTP.
   Future<void> _checkExpired(DateTime expiryDate) async {
     try {
       DateTime serverTime = await NTP.now();
@@ -45,11 +54,21 @@ class UserDefineExpireController implements ExpireBaseController {
       _setExpire(isExpired);
     } catch (err) {
       ExpireLogger.error(
-        "Check Expired: Server time not available. Using local time",
+        "Check Expired: Server time not available.",
       );
-      final isExpired = DateTime.now().isAfter(expiryDate);
-      _setExpire(isExpired);
+      if (localDateTimeFallback) {
+        _checkExpiredLocal(expiryDate);
+      } else {
+        _setExpire(false);
+      }
     }
+  }
+
+  /// Checks if the expiry date has been reached using the local time.
+  void _checkExpiredLocal(DateTime expiryDate) async {
+    ExpireLogger.info("Using local time");
+    final isExpired = DateTime.now().isAfter(expiryDate);
+    _setExpire(isExpired);
   }
 
   /// Updates the [expireState] based on the given [isExpired] value.

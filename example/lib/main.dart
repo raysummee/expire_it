@@ -1,7 +1,9 @@
 import 'package:expire_it/expire_it.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  ExpireIt.controller = UserDefineExpireController(expiryDate: DateTime(2022));
   runApp(const MyApp());
 }
 
@@ -18,10 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: ExpireBuilder(
-          controller: UserDefineExpireController(
-            expiryDate: DateTime.now().subtract(const Duration(hours: 1)),
-          ),
+        body: ExpireIt(
           expireBuilder: (context) {
             return const Center(
               child: Text("Expired"),

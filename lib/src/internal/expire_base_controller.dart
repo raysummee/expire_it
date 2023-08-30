@@ -1,4 +1,4 @@
-import 'package:expire_it/src/expire_state.dart';
+import 'package:expire_it/src/internal/expire_state.dart';
 import 'package:flutter/foundation.dart';
 
 /// [ExpireBaseController] for managing expiration state.

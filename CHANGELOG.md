@@ -1,3 +1,13 @@
+## [0.2.0] - 2023-08-30
+### Added
+- Initialized the `ExpireIt.controller` with a `UserDefineExpireController` instance containing an expiry date of `2022` in the `main()` function.
+- Using the `ExpireIt` widget instead of `ExpireBuilder` Widget for better usability and customization.
+- Fixed an issue with log messages not displaying color codes properly.
+
+## [0.1.2] - 2023-08-30
+### Added
+- Added localDateTimeFallback Parameter: Added a parameter localDateTimeFallback to the UserDefineExpireController constructor. When set to true, it allows the controller to fall back to using local device time when the server time is unavailable.
+
 ## [0.1.1] - 2023-08-24
 ### Added
 - Example folder rearranged
