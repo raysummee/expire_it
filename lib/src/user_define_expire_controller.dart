@@ -17,16 +17,30 @@ class UserDefineExpireController implements ExpireBaseController {
   /// The expiry date to be checked against.
   final DateTime expiryDate;
 
-  /// Creates a [UserDefineExpireController] with the given [expiryDate].
-  /// The [expiryDate] represents the date and time at which the entity being managed is set to expire.
-  /// The [localDateTimeFallback] indicates whether to fallback to local device time if server time is not available.
+  /// A controller for managing user-defined expiration dates.
+  ///
+  /// The [UserDefineExpireController] allows users to set custom expiration dates
+  /// for specific items or events. It takes an [expiryDate] parameter, which is
+  /// required and represents the date and time when the item/event expires.
+  ///
+  /// Additionally, users can customize the behavior of the expiration controller
+  /// by providing optional [settings]. The available settings include:
+  ///
+  /// - [localDateTimeFallback]: A boolean flag (defaulting to `true`) that
+  ///   determines whether to fall back to the local date and time if the provided
+  ///   [expiryDate] is in a different time zone.
+  ///
+  /// - [interval]: A [Duration] representing the interval for checking the
+  ///
   UserDefineExpireController({
     required this.expiryDate,
-    this.localDateTimeFallback = true,
+    this.settings = const UserDefineExpireSettings(
+      localDateTimeFallback: true,
+      interval: Duration(minutes: 10),
+    ),
   });
 
-  /// Indicates whether to use local date and time when the server time is unavailable.
-  final bool localDateTimeFallback;
+  final UserDefineExpireSettings settings;
 
   /// The [ValueNotifier] that holds the current expiration state.
   @override
@@ -41,7 +55,7 @@ class UserDefineExpireController implements ExpireBaseController {
   void _runExpireLoop(DateTime expiryDate) {
     _checkExpired(expiryDate);
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(minutes: 10), (timer) {
+    _timer = Timer.periodic(settings.interval, (timer) {
       _checkExpired(expiryDate);
     });
   }
@@ -56,7 +70,7 @@ class UserDefineExpireController implements ExpireBaseController {
       ExpireLogger.error(
         "Check Expired: Server time not available.",
       );
-      if (localDateTimeFallback) {
+      if (settings.localDateTimeFallback) {
         _checkExpiredLocal(expiryDate);
       } else {
         _setExpire(false);
@@ -86,4 +100,18 @@ class UserDefineExpireController implements ExpireBaseController {
     expireState.dispose();
     _timer?.cancel();
   }
+}
+
+/// Settings for customizing the behavior of [UserDefineExpireController].
+class UserDefineExpireSettings {
+  /// Indicates whether to use local date and time when the server time is unavailable.
+  final bool localDateTimeFallback;
+
+  /// Represents the interval for checking the expiration status.
+  final Duration interval;
+
+  const UserDefineExpireSettings({
+    required this.localDateTimeFallback,
+    required this.interval,
+  });
 }

@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 /// expiration is not applicable. It maintains a constant [ExpireState.running] state,
 /// indicating that the entity is always in a "running" state and never expires.
 class DisabledExpireController implements ExpireBaseController {
+  const DisabledExpireController();
+
   /// Returns a [ValueNotifier] with a constant [ExpireState.running] state.
   @override
   ValueNotifier<ExpireState> get expireState =>
