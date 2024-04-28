@@ -1,3 +1,9 @@
+## [1.0.0] - 2024-04-28
+### Added
+- Moved controller initialization from `main` function to `ExpireIt` Widget.
+- Removed user accesibility from `ExpireBuilder` which was causing issue and confusion to users
+- Added `UserDefineExpireSettings`
+
 ## [0.2.0] - 2023-08-30
 ### Added
 - Initialized the `ExpireIt.controller` with a `UserDefineExpireController` instance containing an expiry date of `2022` in the `main()` function.
