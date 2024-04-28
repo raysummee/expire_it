@@ -37,19 +37,13 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
     import 'package:expireit/expireit.dart';
     ```
 
-3. **Initialize:** Initialize the ExpireIt.controller with a specific expiration date. In this example, we use a UserDefineExpireController:
-
-    ```dart
-    void main() {
-        ExpireIt.controller = UserDefineExpireController(expiryDate: DateTime(2023));
-        runApp(const MyApp());
-    }
-    ```
-
-4. **Build UI:** In your Flutter app's build method, utilize the ExpireIt widget to manage the UI based on expiration status:
+3. **Implementation:** In your Flutter app's build method, utilize the ExpireIt widget to manage the UI based on expiration status:
 
     ```dart
     ExpireIt(
+        controller: UserDefineExpireController(
+            expiryDate: DateTime(2025),
+        ),
         expireBuilder: (context) {
             return const Center(
                 child: Text("Expired"),
@@ -67,7 +61,7 @@ To integrate the ExpireIt functionality into your Flutter app, follow these step
         },
     ),
     ```
-5. **Customize UI**: Customize the appearance of the expiration dialog and loading indicator to match your app's design.
+4. **Customize UI**: Customize the appearance of the expiration dialog and loading indicator to match your app's design.
 
 For a more detailed guide and advanced configuration options, please refer to the ExpireIt documentation.
 
